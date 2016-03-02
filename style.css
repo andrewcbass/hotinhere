@@ -1,0 +1,29 @@
+.cards {
+  padding: 5px;
+}
+
+.noResults {
+  display: none;
+}
+
+h2 {
+  display: inline-block;
+}
+
+.remove {
+  margin-left: 5px;
+  margin-top: -25px;
+  opacity: 0.8;
+}
+
+.idcode {
+  display: none;
+}
+
+#template {
+  display: none;
+}
+
+.weatherImage, .temperature {
+  display: inline-block;
+}
