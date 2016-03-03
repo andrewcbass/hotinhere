@@ -12,16 +12,13 @@ $(function ()  {
 
 function loadFromLocalStorage() {
   if (localStorage.idcodes === undefined) {
-    // localStorage.zipcodes = '[]';
     localStorage.idcodes = '[]';
   }
 
-  // zipcodes = JSON.parse(localStorage.zipcodes);
   idcodes = JSON.parse(localStorage.idcodes);
-  console.log('IDCODES', idcodes);
 
-  var arr = idcodes.map(function (oneid) {
-    return findWeather(oneid);
+  idcodes.forEach(function (oneid) {
+    findWeather(oneid);
   });
 
 }
@@ -68,11 +65,14 @@ function findWeather(id) {
     success: function (data) {
       $('.cards').append(makeWeatherCard(data));
     },
+
+    error: function () {
+      setTimeout(findWeather(id), 1500);
+    },
   });
 }
 
 function makeWeatherCard(data) {
-  console.log('DATA', data);
   var $card = $('#template').clone();
   $card.removeAttr('id');
   $card.find('.city').text(data.name);
@@ -87,10 +87,12 @@ function makeWeatherCard(data) {
 }
 
 function removeCard() {
-  console.log('THIS', $(this));
-  $(this).closest('.card').remove();
-  debugger;
+  var code = parseInt($(this).parent().find('.idcode').text());
 
+  var index = idcodes.indexOf(code);
+  idcodes.splice(index, 1);
+  saveToLocalStorage();
+  $(this).closest('.card').remove();
 }
 
 
