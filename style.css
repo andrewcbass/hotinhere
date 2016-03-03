@@ -19,6 +19,7 @@ h1
 .jumbotron > h5
 {
     text-align: right;
+    background-color: azure;
 }
 
 body
@@ -34,6 +35,7 @@ body
 .cards
 {
     padding: 5px;
+    background-color: azure;
 }
 
 .noResults
