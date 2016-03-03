@@ -1,3 +1,6 @@
+* {
+  text-align: center;
+}
 .cards {
   padding: 5px;
 }
@@ -15,15 +18,27 @@ h2 {
   margin-top: -25px;
   opacity: 0.8;
 }
+.show {
+  margin: 0 auto;
+  margin-bottom: 3px; 
+}
 
-/*.idcode {
+.idcode {
   display: none;
-}*/
+}
 
 #template {
   display: none;
 }
 
+.forecast {
+  display: none;
+}
+
 .weatherImage, .temperature {
   display: inline-block;
+}
+
+.card, .daily {
+  border: 1px solid lightblue;
 }

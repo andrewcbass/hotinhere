@@ -8,6 +8,7 @@ $(function ()  {
   loadFromLocalStorage();
   $('#addZip').click(addZip);
   $('.cards').on('click', '.remove', removeCard);
+  $('.cards').on('click', '.show', forecast)
 });
 
 function loadFromLocalStorage() {
@@ -26,7 +27,7 @@ function loadFromLocalStorage() {
 function addZip(e) {
   e.preventDefault();
   var newZip = $('#zipcode').val();
-  $('#zipcode').attr('placeholder', 'Search by zipcode');
+  $('#zipcode').val('');
   findNewWeather(newZip);
 }
 
@@ -39,7 +40,7 @@ function findNewWeather(zip) {
 
   $.ajax({
     method:'GET',
-    url:`http://api.openweathermap.org/data/2.5/weather?zip=${zip},us&units=imperial&appid=${APIid}`,
+    url:`http://api.openweathermap.org/data/2.5/weather?zip=${zip}&units=imperial&appid=${APIid}`,
     success: function (data) {
       if (data.cod !== 200) {
         $('.noResults').css('display', 'inherit');
@@ -95,7 +96,37 @@ function removeCard() {
   $(this).closest('.card').remove();
 }
 
+function forecast() {
+  var $thisCard = $(this).siblings('.forecast');
+  console.log('you clicked ok');
+  $(this).siblings('.forecast').toggle();
+  var id = $(this).siblings('.idcode').text();
+  console.log('ID', id);
 
+  $.ajax({
+    method:'GET',
+    url:`http://api.openweathermap.org/data/2.5/forecast/daily?id=${id}cnt=3&units=imperial&appid=${APIid}`,
+    success: function (data) {
+      // $('.forecast').append(makeForecast(data));
+      makeForecast(data, $thisCard);
+    },
+
+    error: function () {
+      console.log('error');
+    },
+  });
+}
+
+function makeForecast(data, $this) {
+  console.log('$THIS', $this);
+
+  $this.find('.day1 span').text(Math.round(data.list[0].temp.max) + ' / ' + Math.round(data.list[0].temp.min) + ' °F');
+  $this.find('.day2 span').text(Math.round(data.list[1].temp.max) + ' / ' + Math.round(data.list[1].temp.min) + ' °F');
+  $this.find('.day3 span').text(Math.round(data.list[2].temp.max) + ' / ' + Math.round(data.list[2].temp.min) + ' °F');
+  $this.find('.day1 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png');
+  $this.find('.day2 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[1].weather[0].icon + '.png');
+  $this.find('.day3 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[2].weather[0].icon + '.png');
+}
 
 
 
