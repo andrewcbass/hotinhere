@@ -1,17 +1,19 @@
 'use strict';
 
-
 var idcodes;
+
+//saved to make html strings shorter
 var APIid = '44db6a862fba0b067b1930da0d769e98';
 
 $(function ()  {
   loadFromLocalStorage();
   $('#addZip').click(addZip);
+  $('#refresh').click(refresh);
   $('.cards').on('click', '.remove', removeCard);
-  $('.cards').on('click', '.show', forecast)
+  $('.cards').on('click', '.show', forecast);
 });
 
-function loadFromLocalStorage() {
+function loadFromLocalStorage() {//checks for localStorage and makes cards for existing
   if (localStorage.idcodes === undefined) {
     localStorage.idcodes = '[]';
   }
@@ -21,22 +23,27 @@ function loadFromLocalStorage() {
   idcodes.forEach(function (oneid) {
     findWeather(oneid);
   });
+}
+
+function refresh() { //resend ajax requests for current cards
+  $('.cards').empty();
+  loadFromLocalStorage();
 
 }
 
-function addZip(e) {
+function addZip(e) {//pushes the zipcode to the findNewWeather ajax function
   e.preventDefault();
   var newZip = $('#zipcode').val();
   $('#zipcode').val('');
   findNewWeather(newZip);
 }
 
-function saveToLocalStorage() {
+function saveToLocalStorage() {//push new city idcode to localStorage
   localStorage.idcodes = JSON.stringify(idcodes);
 }
 
 function findNewWeather(zip) {
-  //find weather for card 1st time searched
+  //find weather for location just searched for, and push the idcode
 
   $.ajax({
     method:'GET',
@@ -73,7 +80,7 @@ function findWeather(id) {
   });
 }
 
-function makeWeatherCard(data) {
+function makeWeatherCard(data) {//for making each new weather card, cloned from template
   var $card = $('#template').clone();
   $card.removeAttr('id');
   $card.find('.city').text(data.name);
@@ -87,7 +94,7 @@ function makeWeatherCard(data) {
   return $card;
 }
 
-function removeCard() {
+function removeCard() {//removes card on click of X
   var code = parseInt($(this).parent().find('.idcode').text());
 
   var index = idcodes.indexOf(code);
@@ -96,18 +103,15 @@ function removeCard() {
   $(this).closest('.card').remove();
 }
 
-function forecast() {
+function forecast() {//ajax request for 3 day forecast data
   var $thisCard = $(this).siblings('.forecast');
-  console.log('you clicked ok');
-  $(this).siblings('.forecast').toggle();
+  $(this).siblings('.forecast').toggle();  //toggle hidden or show
   var id = $(this).siblings('.idcode').text();
-  console.log('ID', id);
 
   $.ajax({
     method:'GET',
     url:`http://api.openweathermap.org/data/2.5/forecast/daily?id=${id}cnt=3&units=imperial&appid=${APIid}`,
     success: function (data) {
-      // $('.forecast').append(makeForecast(data));
       makeForecast(data, $thisCard);
     },
 
@@ -117,31 +121,14 @@ function forecast() {
   });
 }
 
-function makeForecast(data, $this) {
-  console.log('DATA', data);
-
-
+function makeForecast(data, $this) { //shows hidden forecast area and appends data
+//days temps of max / min, rounded
   $this.find('.day1 span').text(Math.round(data.list[0].temp.max) + ' / ' + Math.round(data.list[0].temp.min) + ' °F');
   $this.find('.day2 span').text(Math.round(data.list[1].temp.max) + ' / ' + Math.round(data.list[1].temp.min) + ' °F');
   $this.find('.day3 span').text(Math.round(data.list[2].temp.max) + ' / ' + Math.round(data.list[2].temp.min) + ' °F');
+
+//days icon image for weather (like rainy or cloudy)
   $this.find('.day1 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[0].weather[0].icon + '.png');
   $this.find('.day2 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[1].weather[0].icon + '.png');
   $this.find('.day3 img').attr('src', 'http://openweathermap.org/img/w/' + data.list[2].weather[0].icon + '.png');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//footer

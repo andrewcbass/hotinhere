@@ -21,12 +21,13 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-sm-offset-4">
-        <div class="input-group">
-          <input type="text" id='zipcode' class="form-control" placeholder="Search by zipcode">
+        <form class="input-group">
+          <input type="text" id='zipcode' class="form-control submit" placeholder="Search by zipcode">
           <span class="input-group-btn">
-            <button id='addZip'class="btn btn-default" type="button">Add location!</button>
+            <button id='addZip'class="btn btn-default btn-info" type="submit">Add location!</button>
           </span>
-        </div>
+        </form>
+        <button id='refresh' type="button" class="btn btn-info">Refresh Weather</button>
       </div>
     </div>
   </div>
@@ -37,25 +38,25 @@
       </div>
     </div>
     <div class="row cards">
-      <!-- here only for template, never displayed -->
-      <div id='template' class="col-sm-6 col-lg-3 card">
-        <h2 class='city'>Oklahoma City</h2>
-        <button type="button" class="btn btn-danger btn-xs remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-        <br>
-        <img class='weatherImage' src="http://openweathermap.org/img/w/10d.png">
-        <h3 class='temperature'>temp here</h3>
-        <h4 class='weatherDescription'>rain or clouds</h4>
-        <p class='timeStamp'>time stamp</p>
-        <span class='idcode'>idcodehere</span>
-        <button type="button" class="btn btn-info show">Show Forecast</button>
-        <div class="row forecast">
-          <div class="col-sm-12"><p class="bg-info"><em>  Next 3 Days</em></p></div>
-          <div class="day1 col-sm-4"><span></span><img></div>
-          <div class="day2 col-sm-4"><span></span><img></div>
-          <div class="day3 col-sm-4"><span></span><img></div>
-        </div>
-      </div>
-      </div>
+      <!-- Data is appended here!! Copied from #template below -->
+    </div>
+  </div>
+  <!-- here only for template, never displayed -->
+  <div id='template' class="col-sm-6 col-lg-3 card">
+    <h2 class='city'>Oklahoma City</h2>
+    <button type="button" class="btn btn-danger btn-xs remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    <br>
+    <img class='weatherImage' src="http://openweathermap.org/img/w/10d.png">
+    <h3 class='temperature'>temp here</h3>
+    <h4 class='weatherDescription'>rain or clouds</h4>
+    <p class='timeStamp'>time stamp</p>
+    <span class='idcode'>idcodehere</span>
+    <button type="button" class="btn btn-info show">Show Forecast</button>
+    <div class="row forecast">
+      <div class="col-sm-12"><p class="bg-info"><em>  Next 3 Days</em></p></div>
+      <div class="day1 col-sm-4"><span></span><img></div>
+      <div class="day2 col-sm-4"><span></span><img></div>
+      <div class="day3 col-sm-4"><span></span><img></div>
     </div>
   </div>
 
