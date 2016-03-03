@@ -20,13 +20,15 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-sm-4 col-sm-offset-4">
+      <div class="col-sm-6">
         <form class="input-group">
           <input type="text" id='zipcode' class="form-control submit" placeholder="Search by zipcode">
           <span class="input-group-btn">
             <button id='addZip'class="btn btn-default btn-info" type="submit">Add location!</button>
           </span>
         </form>
+      </div>
+      <div class="col-sm-3 col-sm-offset-3">
         <button id='refresh' type="button" class="btn btn-info">Refresh Weather</button>
       </div>
     </div>
@@ -41,7 +43,8 @@
       <!-- Data is appended here!! Copied from #template below -->
     </div>
   </div>
-  <!-- here only for template, never displayed -->
+
+<!-- here only for template, never displayed -->
   <div id='template' class="col-sm-6 col-lg-3 card">
     <h2 class='city'>Oklahoma City</h2>
     <button type="button" class="btn btn-danger btn-xs remove"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>

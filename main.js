@@ -82,7 +82,7 @@ function findWeather(id) {
 
 function makeWeatherCard(data) {//for making each new weather card, cloned from template
   var $card = $('#template').clone();
-  $card.removeAttr('id').addClass('cardResults');
+  $card.removeAttr('id');
   $card.find('.city').text(data.name);
   $card.find('.temperature').text(Math.round(data.main.temp) +  '°F');
   $card.find('.weatherImage').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
