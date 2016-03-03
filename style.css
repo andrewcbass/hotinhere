@@ -13,13 +13,13 @@ h1
 
 .jumbotron > p
 {
+    background-color: azure;
     text-align: left;
 }
 
 .jumbotron > h5
 {
     text-align: right;
-    background-color: azure;
 }
 
 body
@@ -35,7 +35,10 @@ body
 .cards
 {
     padding: 5px;
-    background-color: azure;
+}
+
+.cardResults {
+  background-color: azure;
 }
 
 .noResults
