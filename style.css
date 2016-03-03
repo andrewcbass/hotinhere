@@ -1,5 +1,22 @@
 * {
   text-align: center;
+  color: mediumorchid;
+}
+h1 {
+  text-align: left;
+  font-family: 'Brush Script MT', cursive;
+}
+
+.jumbotron>p {
+  text-align: left;
+}
+
+.jumbotron>h5 {
+  text-align: right;
+}
+
+body {
+  background: aquamarine;
 }
 .cards {
   padding: 5px;
@@ -20,7 +37,7 @@ h2 {
 }
 .show {
   margin: 0 auto;
-  margin-bottom: 3px; 
+  margin-bottom: 3px;
 }
 
 .idcode {

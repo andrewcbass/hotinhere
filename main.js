@@ -79,7 +79,7 @@ function makeWeatherCard(data) {
   $card.find('.city').text(data.name);
   $card.find('.temperature').text(Math.round(data.main.temp) +  '°F');
   $card.find('.weatherImage').attr('src', 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png');
-  $card.find('.weatherDescription').text(data.weather[0].main + ', ' + data.weather[0].description);
+  $card.find('.weatherDescription').text(data.weather[0].description);
   var timeConverted = new Date(data.dt * 1000); //convert to readable time
   $card.find('.timeStamp').text(timeConverted.toLocaleString());
   $card.find('.idcode').text(data.id);
@@ -118,7 +118,8 @@ function forecast() {
 }
 
 function makeForecast(data, $this) {
-  console.log('$THIS', $this);
+  console.log('DATA', data);
+
 
   $this.find('.day1 span').text(Math.round(data.list[0].temp.max) + ' / ' + Math.round(data.list[0].temp.min) + ' °F');
   $this.find('.day2 span').text(Math.round(data.list[1].temp.max) + ' / ' + Math.round(data.list[1].temp.min) + ' °F');
