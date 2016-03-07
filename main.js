@@ -22,6 +22,7 @@ function loadFromLocalStorage() {//checks for localStorage and makes cards for e
 
   idcodes.forEach(function (oneid) {
     findWeather(oneid);
+
   });
 }
 
